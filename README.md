@@ -16,5 +16,6 @@ By oluwakeyejohn
 
 ## Setup
 * clone this repo
+* create "media" folder in project root
 * run ```pip3 install -r requirements.txt```
 * run ```python3 manage.py runserver```
