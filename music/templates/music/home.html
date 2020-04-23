@@ -1,0 +1,139 @@
+{% extends 'music/base.html' %}
+
+{% block content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="container">
+
+                <div class="container">
+                    <form class="form-inline my-2 my-lg-0" method="GET" action="">
+                        <div class="col-md-9">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search" required
+                                id="searchbar">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                    Dropdown button
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#">Link 1</a>
+                                    <a class="dropdown-item" href="#">Link 2</a>
+                                    <a class="dropdown-item" href="#">Link 3</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <hr>
+                <p id="result"></p>
+
+                <p>{{ main_msg }}</p>
+
+
+                <!--Albums-->
+                {% if albums %}
+                <p>{{ msg_albums }}</p>
+                <div class="row">
+                    {% for album in albums %}
+                    <div class="col-md-3" style="padding-bottom:20px;margin-bottom:32px;">
+                        <img class="card-img-top img-fluid rounded responsive" src="{{ album.album_cover.url }}">
+                        <br><br>
+                        <p>{{ album.album_title|truncatechars:16 }}</p>
+                        <a href="{% url 'album_detail' album.pk %}" class="btn btn-primary">View Album</a>
+
+                        <script>
+                            $("#dislike").hover(function(){
+                                console.log("Entered")
+                                $("#dislike").css("color","green")
+                            },
+                            function(){
+                                console.log("Entered")
+                                $("#dislike").css("color","red")
+                            })
+                        </script>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+
+                <!--Songs-->
+                {% if songs %}
+                <p>{{ msg_songs }}</p>
+                <div class="row">
+                    {% for song in songs %}
+                    <div class="col-md-3" style="padding-bottom:20px;margin-bottom:32px;">
+                        <img class="card-img-top img-fluid rounded responsive"
+                            src="{{ song.song_album.album_cover.url }}">
+                        <br><br>
+                        <p>{{ song.song_title|truncatechars:16 }}</p>
+                        <a href="{% url 'song_detail' song.pk %}" class="btn btn-primary">Play Song</a>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+
+                <!--Artists-->
+                {% if artists %}
+                <p>{{ msg_artists }}</p>
+                <div class="row">
+                    {% for artist in artists %}
+                    <div class="col-md-3" style="padding-bottom:20px;margin-bottom:32px;">
+                        <img class="card-img-top img-fluid rounded responsive"
+                            src="{{ song.song_album.album_cover.url }}">
+                        <br><br>
+                        <p>{{ artist.artist_name|truncatechars:16 }}</p>
+                        <a href="{% url 'artist_detail' artist.pk %}" class="btn btn-primary">View Artist</a>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="container">
+                <h4>About Me</h4>
+                <div class="text-center">
+                    <div class="LI-profile-badge" data-version="v1" data-size="medium" data-locale="en_US"
+                        data-type="vertical" data-theme="light" data-vanity="oluwakeye-john-1706"><a
+                            class="LI-simple-link"
+                            href='https://ng.linkedin.com/in/oluwakeye-john-1706?trk=profile-badge'>Oluwakeye John</a>
+                    </div>
+                    <hr>
+                        {{ contact_form }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        console.log("Ready")
+        $("#searchbar").keyup(function () {
+            var q = $("#searchbar").val()
+            $("#searchbar").val(q.toUpperCase())
+            $.get("{% url 'home' %}?q=" + q, function (data, status) {
+                console.log(data)
+                $("#result").html(data)
+            })
+        })
+
+
+    })
+</script>
+{% endblock content %}

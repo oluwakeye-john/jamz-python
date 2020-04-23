@@ -1,0 +1,27 @@
+{% if albums %}
+<p>Albums</p>
+{% for album in albums %}
+<li>
+    <a href="{% url 'album_detail' album.pk %}">{{ album.album_title }}</a>
+</li>
+{% endfor %}
+{% endif %}
+
+{% if songs %}
+<p>Songs</p>
+{% for song in songs %}
+<li>
+    <a href="{% url 'song_detail' song.pk %}">{{ song.song_title }}</a>
+</li>
+{% endfor %}
+{% endif %}
+
+{% if artists %}
+<p>Artists</p>
+{% for artist in artists %}
+<li>
+    <a href="{% url 'artist_detail' artist.pk %}">{{ artist.artist_name }}</a>
+</li>
+{% endfor %}
+{% endif %}
+

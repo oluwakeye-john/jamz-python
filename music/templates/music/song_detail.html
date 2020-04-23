@@ -1,0 +1,24 @@
+{% extends 'music/base.html' %}
+
+{% block content %}
+<br>
+<div class="container">
+    <br>
+    <div>
+        <h4>{{ song.song_title }} by
+            <a href="{% url 'artist_detail' album.album_artist.pk %}">{{ album.album_artist }}</a>
+        </h4>
+
+        <div class="text-center">
+            <img class="img-fluid rounded responsive" width="200px" height="200px" src="{{ album.album_cover.url }}">
+            <br><br>
+            <audio controls loop autoplay preload="auto">
+                <source src="{{ song.song_file.url }}" type="audio/mp3">
+            </audio>
+            <br><br>
+            <button onclick="window.location.href = '{{ song.song_file.url }}'" href ="{{ song.song_file.url }}" download class="btn btn-default"><span class="icon-cloud-download"></span>Download</button>
+        </div>
+        <br>
+    </div>
+</div> 
+    {% endblock %}

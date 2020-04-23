@@ -1,0 +1,39 @@
+{% load crispy_forms_tags %}
+
+<div class="container">
+    <h4>Contact Me</h4>
+    <br>
+    <div name="contact_form">
+
+        <p style="color: green" id="contact_msg"></p>
+        {{ form|crispy }}
+
+        <input id = "contact_button"
+               value="Send" type="submit" class="btn btn-primary">
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("#contact_button").click(function(){
+        console.log("Contact")
+        console.log("csrf: {{ csrfmiddlewaretoken }}");
+
+        var d_name = $("#id_name").val();
+        var d_email = $("#id_email").val();
+        var d_message = $("#id_message").val();
+
+        console.log(d_name)
+
+        $.post("{% url 'contact' %}", {
+                csrfmiddlewaretoken: "{{ csrfmiddlewaretoken }}",
+                name: d_name,
+                email: d_email,
+                message: d_message
+            },function (data, status) {
+                $("#contact_msg").text(data)
+
+            }
+
+        )
+    })
+</script>

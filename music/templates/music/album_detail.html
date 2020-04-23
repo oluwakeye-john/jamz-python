@@ -1,0 +1,44 @@
+{% extends 'music/base.html' %}
+
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<br>
+<div class="container">
+    <br>
+
+    <div>
+        <h4>{{album.album_title}} by
+            <a href="{% url 'artist_detail' album.album_artist.pk %}">{{ album.album_artist }}</a>
+        </h4>
+    </div>
+
+    <div class="text-center">
+        <img class="img-fluid rounded responsive" width="200px" height="200px" src="{{ album.album_cover.url }}">
+        <br><br>
+        {{ like_dislike }}
+    <br>
+    </div>
+    <br>
+
+    <h3>Songs in {{ album.album_title }}({{ songs.count }})</h3>
+
+    <ul class="list-group">
+        {% for song in songs %}
+        <li class="list-group-item">
+            <a href="{% url 'song_detail' song.pk %}"><span class="icon-control-play"></span> {{ song }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <br><br>
+    <h3>More Albums by {{album.album_artist}}({{ more_albums.count }})</h3>
+    <ul class="list-group">
+        {% for more_album in more_albums %}
+        <li class="list-group-item">
+            <a href="{% url 'album_detail' more_album.pk %}">{{ more_album }}</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

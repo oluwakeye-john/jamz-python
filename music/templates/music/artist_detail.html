@@ -1,0 +1,28 @@
+{% extends 'music/base.html' %}
+
+{% block content %}
+<br>
+
+<div class="container">
+    <div class="text-center">
+        <h4>{{ artist.artist_name }}</h4>
+    </div>
+    <hr>
+    {% if albums %}
+    <p>Albums by {{ artist.artist_name }}</p>
+    <br>
+    <div class="row">
+        {% for album in albums %}
+        <div class="col-md-3" style="padding-bottom:20px;margin-bottom:32px;">
+            <img class="card-img-top img-fluid rounded responsive" src="{{ album.album_cover.url }}">
+            <br><br>
+            <p>{{ album.album_title }}</p>
+            <a href="{% url 'album_detail' album.pk %}" class="btn btn-primary">View Album</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    </div>
+
+    {% endblock %}

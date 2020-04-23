@@ -1,0 +1,14 @@
+{% extends 'music/base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <br>
+    <legend>
+        You have logged out
+    </legend>
+    <a class="btn btn-secondary" href="{% url 'login' %}"><small>Click here to log in again</small></a>
+    <br>
+    <br>
+</div>
+{% endblock %}

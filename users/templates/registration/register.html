@@ -1,0 +1,27 @@
+{% extends 'music/base.html' %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <form method="post" enctype="multipart/form-data">
+                <h2 class="text-center">Join us TODAY</h2>
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="form-group">
+                    <button class="btn btn-primary btn-block" type="submit">Sign Up</button>
+                </div>
+                <br>
+                <a class="text-muted" href="{% url 'login' %}">You already have an account? Login here.</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<!--
+assets/img/hope-house-press-leather-diary-studio-IOzk8YKDhYg-unsplash.jpg
+-->

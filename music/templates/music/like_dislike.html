@@ -1,0 +1,28 @@
+<div id="like_dislike_div">
+    <p style="color: {{ msg_color }}">{{ list_dislike_msg }}</p>
+    <button id="like" class="btn btn-success"><i class="fa fa-thumbs-o-up"></i></button>
+    <button id="dislike" class="btn btn-danger" ><i class="fa fa-thumbs-o-down"></i></button>
+    <button class="btn btn-info"><i class="fa fa-star"></i></button>
+    <br>
+    <span id="like_span">Likes: {{ album_likes }}</span>
+    <span id="dislike_span">Dislikes: {{ album_dislikes }}</span>
+</div>
+
+<script>
+    $("#like").click(function(){
+        console.log("clicked")
+        $.get("like", function(data, status){
+            console.log(status)
+            $("#like_dislike_div").html(data)
+
+        })
+    })
+    $("#dislike").click(function(){
+        console.log("clicked")
+        $.get("dislike", function(data, status){
+            console.log(status)
+            $("#like_dislike_div").html(data)
+
+        })
+    })
+</script>

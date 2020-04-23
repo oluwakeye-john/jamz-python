@@ -1,0 +1,21 @@
+{% extends 'music/base.html' %}
+{% block content %}
+{% load static %}
+<br>
+<div class=" container">
+    <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+        <div class="avatar">
+            <img class="card-img-top mr-3" src="{{ user.profile.image.url }}" width="300">
+        </div>
+    </div>
+    <br><br>
+    <h1>{{ user.profile.name }}</h1>
+    <p>Email: {{ user.email }}</p>
+    
+    <div class="" role="group">
+        <a href="#" class="btn btn-primary">Update Profile</a>
+        <a href="{% url 'password_change' %}" class="btn btn-primary">Change Password</a>
+    </div>
+</div>
+<br>
+{% endblock %}
